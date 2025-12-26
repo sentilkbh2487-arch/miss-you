@@ -133,7 +133,9 @@
     const btn = document.getElementById("intro-btn");
 
     btn.addEventListener("click", () => {
-    const audio = new Audio('Flower%20Dance.mp3');
+    const audio = new Audio('FlowerDance.mp3'); // 确认文件名无空格
+    audio.loop = true;  // 可选：循环播放
+    audio.volume = 0.6; // 可选：音量
     audio.play().catch(err => console.log('播放被拦截', err));
 
     introBox.classList.add("fade-out");
@@ -141,7 +143,8 @@
         introBox.remove();
         startNotes();  
     }, 1000);
-});
+    });
+
 
 
 
@@ -173,6 +176,7 @@
 
 </body>
 </html>
+
 
 
 
