@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>💗</title>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: "微软雅黑", sans-serif;
+    }
+
+    body {
+        background: url('bg.jpg') no-repeat center center;
+        background-size: cover;
+    }
+
+    /* ===== 初始提示 ===== */
+    #intro-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 10;
+        animation: fadeIn 1s forwards;
+    }
+
+    #intro-text {
+        font-size: 36px; /* 略大一点 */
+        font-weight: 400; /* 不太粗 */
+        color: #d85c8a;
+        margin-bottom: 24px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    #intro-btn {
+        font-size: 20px; /* 略大一点 */
+        padding: 10px 30px;
+        border: none;
+        border-radius: 20px;
+        background: #ffccd5;
+        color: #a62639;
+        cursor: pointer;
+    }
+
+    #intro-btn:active {
+        transform: scale(0.96);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+        to { opacity: 0; }
+    }
+
+    .fade-out {
+        animation: fadeOut 1s forwards;
+    }
+
+    /* ===== 彩色便签 ===== */
+    .note {
+        position: absolute;
+        min-width: 160px;  /* 略大 */
+        max-width: 260px;  /* 略大 */
+        padding: 18px 20px; /* 略大 */
+        border-radius: 6px;
+        font-weight: 400;   /* 不太粗 */
+        line-height: 1.4;
+        opacity: 0;
+        pointer-events: none;
+        animation:
+            noteIn 1.6s ease forwards,
+            noteFloat 7s ease-in-out infinite;
+        box-shadow:
+            0 8px 18px rgba(0, 0, 0, 0.15);
+        color: #000;       /* 黑字 */
+        text-align: center; /* 文字居中 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @keyframes noteIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px) scale(0.95) rotate(-1deg);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotate(0deg);
+        }
+    }
+
+    @keyframes noteFloat {
+        0%   { transform: translateY(0) rotate(0deg); }
+        50%  { transform: translateY(-6px) rotate(0.6deg); }
+        100% { transform: translateY(0) rotate(0deg); }
+    }
+</style>
+</head>
+
+<body>
+
+<div id="intro-box">
+    <div id="intro-text">Hi，我有点想你了</div>
+    <button id="intro-btn">我也是</button>
+</div>
+
+<script>
+    const texts = [
+        '多喝水哦~', '保持微笑呀', '元气满满', '记得吃水果', '保持好心情',
+        '好好爱自己', '我想你了', '偷个小懒', '期待见面', '天冷加衣',
+        '顺顺利利', '早点休息', '烦恼消失', '别熬夜', '你开心吗',
+        '多穿衣服', '你超棒的', '别焦虑哦', '加油', '你很特别',
+        '会好的', '要自信哦', '保持常态', '万事顺遂', '平安喜乐'
+    ];
+
+    const noteBgColors = [
+        'skyblue', 'lightgreen', 'lavender', 'lightyellow', 'plum',
+        'coral', 'bisque', 'aquamarine', 'pink'
+    ];
+
+    const introBox = document.getElementById("intro-box");
+    const btn = document.getElementById("intro-btn");
+
+    btn.addEventListener("click", () => {
+        introBox.classList.add("fade-out");
+        setTimeout(() => {
+            introBox.remove();
+            startNotes();
+        }, 1000);
+    });
+
+    function startNotes() {
+        setInterval(() => {
+            const note = document.createElement("div");
+            note.className = "note";
+            note.innerText = texts[Math.floor(Math.random() * texts.length)];
+
+            // 随机彩色底
+            note.style.background = noteBgColors[Math.floor(Math.random() * noteBgColors.length)];
+
+            // 字号 & 透明度
+            const size = Math.random() * 8 + 16;  // 略大
+            const opacity = Math.random() * 0.3 + 0.7;
+            note.style.fontSize = size + "px";
+            note.style.opacity = opacity;
+
+            // 随机位置
+            const x = Math.random() * (window.innerWidth - 260);
+            const y = Math.random() * (window.innerHeight - 140);
+            note.style.left = x + "px";
+            note.style.top = y + "px";
+
+            document.body.appendChild(note);
+        }, 120);
+    }
+</script>
+
+</body>
+</html>
