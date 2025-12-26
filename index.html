@@ -147,33 +147,40 @@
 
 
     function startNotes() {
-        setInterval(() => {
-            const note = document.createElement("div");
-            note.className = "note";
-            note.innerText = texts[Math.floor(Math.random() * texts.length)];
+    const width = document.documentElement.clientWidth;
+    const height = document.documentElement.clientHeight;
 
-            // 随机彩色底
-            note.style.background = noteBgColors[Math.floor(Math.random() * noteBgColors.length)];
+    setInterval(() => {
+        const note = document.createElement("div");
+        note.className = "note";
+        note.innerText = texts[Math.floor(Math.random() * texts.length)];
 
-            // 字号 & 透明度
-            const size = Math.random() * 8 + 16;  // 略大
-            const opacity = Math.random() * 0.3 + 0.7;
-            note.style.fontSize = size + "px";
-            note.style.opacity = opacity;
+        // 彩色便签底
+        note.style.background = noteBgColors[Math.floor(Math.random() * noteBgColors.length)];
 
-            // 随机位置
-            const x = Math.random() * (window.innerWidth - 260);
-            const y = Math.random() * (window.innerHeight - 140);
-            note.style.left = x + "px";
-            note.style.top = y + "px";
+        // 字号 & 透明度略小
+        const size = Math.random() * 4 + 14; // 14~18px
+        const opacity = Math.random() * 0.2 + 0.7;
+        note.style.fontSize = size + "px";
+        note.style.opacity = opacity;
 
-            document.body.appendChild(note);
-        }, 800);
+        // 随机位置，考虑便签大小
+        const maxWidth = 120;
+        const maxHeight = 60;
+        const x = Math.random() * (width - maxWidth);
+        const y = Math.random() * (height - maxHeight);
+        note.style.left = x + "px";
+        note.style.top = y + "px";
+
+        document.body.appendChild(note);
+        }, 800); // 文字出现间隔
     }
+
 </script>
 
 </body>
 </html>
+
 
 
 
