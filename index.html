@@ -133,12 +133,17 @@
     const btn = document.getElementById("intro-btn");
 
     btn.addEventListener("click", () => {
-        introBox.classList.add("fade-out");
-        setTimeout(() => {
-            introBox.remove();
-            startNotes();
-        }, 1000);
+    introBox.classList.add("fade-out");
+    setTimeout(() => {
+        introBox.remove();
+        startNotes();
+
+        // ✅ 播放音乐
+        const audio = new Audio('music.mp3');
+        audio.play();
+    }, 1000);
     });
+
 
     function startNotes() {
         setInterval(() => {
@@ -168,3 +173,4 @@
 
 </body>
 </html>
+
