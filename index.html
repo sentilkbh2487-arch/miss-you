@@ -133,14 +133,16 @@
     const btn = document.getElementById("intro-btn");
 
     btn.addEventListener("click", () => {
+    const audio = new Audio('Flower%20Dance.mp3');
+    audio.play().catch(err => console.log('播放被拦截', err));
+
     introBox.classList.add("fade-out");
     setTimeout(() => {
         introBox.remove();
-        const audio = new Audio('FlowerDance.mp3');
-        audio.play();
         startNotes();  
     }, 1000);
-    });
+});
+
 
 
     function startNotes() {
@@ -171,6 +173,7 @@
 
 </body>
 </html>
+
 
 
 
